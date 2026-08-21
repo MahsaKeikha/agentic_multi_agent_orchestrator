@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-multi-agent-orchestrator"
+version = "0.1.0"
+description = "Reference multi agent orchestration system"
+requires-python = ">=3.10"
+authors = [{name = "Mahsa Keikha"}]
+license = {text = "MIT"}
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.setuptools]
+packages = ["AGENTS", "TOOLS", "SKILLS", "orchestration"]
