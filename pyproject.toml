@@ -4,15 +4,27 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentic-multi-agent-orchestrator"
-version = "0.1.0"
-description = "Reference multi agent orchestration system"
+version = "0.2.0"
+description = "Reference multi-agent orchestration system with capability routing, traceable execution, and human approval gates"
 requires-python = ">=3.10"
 authors = [{name = "Mahsa Keikha"}]
 license = {text = "MIT"}
+readme = "README.md"
+keywords = ["agentic-ai", "multi-agent", "orchestration", "ai-safety", "reference-architecture"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
 
 [tool.pytest.ini_options]
 pythonpath = ["."]
 testpaths = ["tests"]
 
-[tool.setuptools]
-packages = ["AGENTS", "TOOLS", "SKILLS", "orchestration"]
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["AGENTS*", "TOOLS*", "SKILLS*", "orchestration*", "safety*", "observability*", "schemas*"]
+namespaces = true
