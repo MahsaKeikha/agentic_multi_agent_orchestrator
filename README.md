@@ -2,20 +2,31 @@
 
 A standalone reference implementation for coordinating specialized AI agents through explicit routing, shared state, tool access, reusable skills, safety gates, and observable execution.
 
-## Architecture
+## Direct agent links
 
-This repository exposes actual implementation files directly under `AGENTS/`, `TOOLS/`, and `SKILLS/`. The orchestrator coordinates independent specialists rather than hiding all behavior inside one prompt.
+- [Planner Agent](AGENTS/planner_agent.py)
+- [Router Agent](AGENTS/router_agent.py)
+- [Execution Agent](AGENTS/execution_agent.py)
+- [Critic Agent](AGENTS/critic_agent.py)
+- [Safety Agent](AGENTS/safety_agent.py)
 
-## Core goals
+## Core implementation
 
-- explicit agent roles
-- deterministic routing and handoffs
-- shared state and evidence tracking
-- tool invocation boundaries
-- reusable skills
-- human approval gates
-- traceable execution
-- reproducible tests
+- [All agents](AGENTS/)
+- [All tools](TOOLS/)
+- [All skills](SKILLS/)
+- [Orchestration](orchestration/)
+- [Safety](safety/)
+- [Observability](observability/)
+- [Schemas](schemas/)
+- [Tests](tests/)
+
+## Execution
+
+```bash
+python run.py
+pytest -q
+```
 
 ## Maturity
 
