@@ -11,10 +11,10 @@ from orchestration.state import RunState
 from safety.approval_gate import can_approve
 from TOOLS.specialist_registry import SpecialistRegistry, default_registry
 
-
 SYSTEM_ID = "F36"
 SYSTEM_NAME = "Agentic Multi Agent Orchestrator"
-VERSION = "0.2.0"
+VERSION = "1.0.0"
+MATURITY = "L3 Gold Standard"
 
 
 def run_system(
@@ -24,7 +24,7 @@ def run_system(
 ) -> Dict[str, Any]:
     active_registry = registry or default_registry()
     state = RunState(case=dict(case))
-    state.record("orchestrator", "run started", {"system_id": SYSTEM_ID, "version": VERSION})
+    state.record("orchestrator", "run started", {"system_id": SYSTEM_ID, "version": VERSION, "maturity": MATURITY})
 
     PlannerAgent().run(state)
     if not state.unresolved_questions:
@@ -44,15 +44,12 @@ def run_system(
     else:
         status = "awaiting_human_approval"
 
-    state.record(
-        "orchestrator",
-        "approval gate evaluated",
-        {"approve_requested": approve, "eligible": eligible, "status": status},
-    )
+    state.record("orchestrator", "approval gate evaluated", {"approve_requested": approve, "eligible": eligible, "status": status})
     return {
         "system_id": SYSTEM_ID,
         "system_name": SYSTEM_NAME,
         "version": VERSION,
+        "maturity": MATURITY,
         "run_id": state.run_id,
         "analyses": state.analyses,
         "evidence": state.evidence,
