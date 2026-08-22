@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentic-multi-agent-orchestrator"
-version = "0.2.0"
-description = "Reference multi-agent orchestration system with capability routing, traceable execution, and human approval gates"
+version = "1.0.0"
+description = "L3 reference multi-agent orchestration system with capability routing, traceable execution, and human approval gates"
 requires-python = ">=3.10"
 authors = [{name = "Mahsa Keikha"}]
 license = {text = "MIT"}
