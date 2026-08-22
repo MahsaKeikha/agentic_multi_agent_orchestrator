@@ -1,0 +1,23 @@
+[
+  {
+    "id": "route-research",
+    "goal": "research evidence for a system decision",
+    "specialists": ["research_agent", "engineering_agent"],
+    "expected_route": "research_agent",
+    "expected_status": "awaiting_human_approval"
+  },
+  {
+    "id": "route-engineering",
+    "goal": "design the engineering architecture for a system",
+    "specialists": ["research_agent", "engineering_agent"],
+    "expected_route": "engineering_agent",
+    "expected_status": "awaiting_human_approval"
+  },
+  {
+    "id": "ambiguous-route",
+    "goal": "prepare an unrelated summary",
+    "specialists": ["research_agent", "engineering_agent"],
+    "expected_route": null,
+    "expected_status": "blocked"
+  }
+]

@@ -15,5 +15,7 @@ class RunResult:
     unresolved_questions: List[str]
     conflicts: List[str]
     risks: List[str]
+    tool_calls: List[Dict[str, Any]]
+    approvals: List[Dict[str, Any]]
     status: str
     trace: List[Dict[str, Any]]
