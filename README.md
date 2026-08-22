@@ -1,10 +1,13 @@
 # F36 Agentic Multi Agent Orchestrator
 
+**Maturity:** L3 Gold Standard  
+**Version:** 1.0.0
+
 F36 is a reference implementation for coordinating specialized AI agents through explicit planning, capability-based routing, bounded specialist execution, critique, safety review, provenance-aware state, and human approval.
 
 ## Why this repository exists
 
-Many "multi-agent" examples are role names wrapped around one linear prompt. F36 instead makes the control plane visible: specialized agents have separate responsibilities, routing decisions are inspectable, specialist execution is bounded by a registry, failures become state, and consequential completion requires an explicit human gate.
+Many multi-agent examples are role names wrapped around one linear prompt. F36 instead makes the control plane visible: specialized agents have separate responsibilities, routing decisions are inspectable, specialist execution is bounded by a registry, failures become state, and consequential completion requires an explicit human gate.
 
 ## Architecture
 
@@ -15,48 +18,34 @@ Many "multi-agent" examples are role names wrapped around one linear prompt. F36
 5. `SafetyAgent` evaluates approval and execution risks.
 6. The orchestrator applies the final human approval gate.
 
-## Direct implementation links
-
-- [Planner Agent](AGENTS/planner_agent.py)
-- [Router Agent](AGENTS/router_agent.py)
-- [Execution Agent](AGENTS/execution_agent.py)
-- [Critic Agent](AGENTS/critic_agent.py)
-- [Safety Agent](AGENTS/safety_agent.py)
-- [Specialist Registry](TOOLS/specialist_registry.py)
-- [Orchestrator](orchestration/orchestrator.py)
-- [Run State](orchestration/state.py)
-- [Approval Gate](safety/approval_gate.py)
-- [Tests](tests/test_orchestrator.py)
-
-## Quick start
+## Reproduce
 
 ```bash
 python -m pip install -e '.[dev]'
-python run.py
+ruff check .
 pytest -q
+python evals/run_benchmarks.py
+python evals/heldout_suite.py
+python examples/minimal.py
+python examples/complete.py
+python run.py
 ```
 
-Core execution is deterministic and offline. The built-in specialists are intentionally local examples so tests and examples do not depend on an external model API.
+CI runs these gates on Python 3.10, 3.11, and 3.12 and publishes held-out results from Python 3.12.
 
 ## Safety model
 
-F36 separates analysis from authority. A successful agent run does not automatically authorize an external action. Missing routing, specialist failure, unresolved conflicts, safety risks, or disabling the human-approval requirement blocks approval. See [docs/SAFETY.md](docs/SAFETY.md).
+F36 separates analysis from authority. A successful run never automatically authorizes an external action. Missing routing, specialist failure, unresolved conflicts, unresolved questions, safety risks, or failed approval eligibility block progression. Human approval is required after automated gates pass and cannot repair an active blocker.
 
-## Evaluation
+## L3 evidence
 
-The test suite covers capability routing, actual specialist invocation, evidence/tool-call traces, human approval, missing specialists, ambiguous routing, disabled approval requirements, and specialist failures. See [docs/EVALUATION.md](docs/EVALUATION.md).
+L3 requires capability-based routing, real specialist invocation, evidence and tool-call provenance, failure containment, adversarial tests, deterministic primary benchmarks, a separate held-out reproducibility suite, clean-checkout examples, green multi-version CI, and published evaluation artifacts. See `docs/L3_AUDIT.md` and `benchmarks/RESULTS.md`.
 
-## Maturity
-
-**L2 candidate, not yet L3 Gold Standard.** This hardening release is designed to satisfy the verified-reference bar after CI and independent reproducibility checks. L3 should only be claimed after benchmark publication and independent validation.
+L3 denotes a reproducible, independently reviewable reference implementation. It does not imply universal routing correctness or autonomous authority over consequential actions.
 
 ## Documentation
 
-- [Architecture](docs/ARCHITECTURE.md)
-- [Agents](docs/AGENTS.md)
-- [Safety](docs/SAFETY.md)
-- [Evaluation](docs/EVALUATION.md)
-- [Extending F36](docs/EXTENDING.md)
+See `docs/ARCHITECTURE.md`, `docs/AGENTS.md`, `docs/SAFETY.md`, `docs/EVALUATION.md`, `docs/EXTENDING.md`, and `docs/L3_AUDIT.md`.
 
 ## Citation and contribution
 
